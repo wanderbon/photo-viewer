@@ -122,6 +122,12 @@
             initWithDataSource:self.dataSource
                   initialPhoto:[self.photos objectAtIndex:initialPhoto]
                       delegate:self];
+        
+        UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+        [imageButton setBackgroundImage:[UIImage imageNamed:@"share_icon.svg"] forState:UIControlStateNormal];
+        [imageButton addTarget:self action:@selector(messageButtonTapped) forControlEvents:UIControlEventAllEvents];
+        UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageButton];
+        photosViewController.rightBarButtonItem = rightBarButtonItem;
         // hide left bar button
         if (self.hideCloseButton) {
             photosViewController.leftBarButtonItem = nil;
