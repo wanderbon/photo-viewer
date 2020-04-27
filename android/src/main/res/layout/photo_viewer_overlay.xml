@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:drawableStart="@drawable/close_icon"
+        android:drawableTop="@drawable/close_icon"
         />
     <Button
         android:id="@+id/btnShare"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="@string/share" />
+        android:drawableBottom="@drawable/share_icon"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
