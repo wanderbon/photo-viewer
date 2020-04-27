@@ -122,27 +122,13 @@
             initWithDataSource:self.dataSource
                   initialPhoto:[self.photos objectAtIndex:initialPhoto]
                       delegate:self];
-
-        
         // hide left bar button
         if (self.hideCloseButton) {
             photosViewController.leftBarButtonItem = nil;
-        } else {
-            UIButton *imageCloseButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-            [imageCloseButton setBackgroundImage:[UIImage imageNamed:@"close_icon.png"] forState:UIControlStateNormal];
-            [imageCloseButton addTarget:self action:@selector(messageButtonTapped) forControlEvents:UIControlEventAllEvents];
-            UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageCloseButton];
-            photosViewController.leftBarButtonItem = leftBarButtonItem;
         }
         // hide right bar button
         if (self.hideShareButton) {
             photosViewController.rightBarButtonItem = nil;
-        } else {
-            UIButton *imageShareButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
-            [imageShareButton setBackgroundImage:[UIImage imageNamed:@"close_icon"] forState:UIControlStateNormal];
-            [imageShareButton addTarget:self action:@selector(messageButtonTapped) forControlEvents:UIControlEventAllEvents];
-            UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageShareButton];
-            photosViewController.rightBarButtonItem = rightBarButtonItem;
         }
 
         self.nytPhotosViewController = photosViewController;
