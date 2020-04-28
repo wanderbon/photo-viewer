@@ -112,7 +112,7 @@ public class MerryPhotoView extends View {
                 })
                 .setOnDismissListener(getDismissListener());
 
-
+        builder.setBackgroundColor(Color.rgb(255, 255, 255));
         builder.setImageChangeListener(getImageChangeListener());
         builder.setStartPosition(getInitial());
         builder.hideStatusBar(isHideStatusBar());
