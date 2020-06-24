@@ -158,27 +158,26 @@
     NSInteger current = (unsigned long)photoIndex;
     MerryPhoto* currentPhoto = [self.dataSource.photos objectAtIndex:current];
     MerryPhotoData* d = self.reactPhotos[current];
+    
+    BOOL isGif = [d.source.request.URL.pathExtension isEqual: @"gif"];
 
-    [[_bridge moduleForClass:[RCTImageLoader class]] loadImageWithURLRequest:d.source.request
-        size:d.source.size
-        scale:d.source.scale
-        clipped:YES
-        resizeMode:RCTResizeModeStretch
-        progressBlock:^(int64_t progress, int64_t total) {
-            //            NSLog(@"%lld %lld", progress, total);
-        }
-        partialLoadBlock:nil
-        completionBlock:^(NSError* error, UIImage* image) {
-            if (image) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-
-                    currentPhoto.image = image;
-
-                    [photosViewController updatePhoto:currentPhoto];
-
-                });
+    SDWebImageDownloader* downloader = [SDWebImageDownloader sharedDownloader];
+    
+    [downloader
+     downloadImageWithURL:d.source.request.URL
+     options:0
+     progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL* _Nullable targetURL) {
+    }
+     completed:^(UIImage* image, NSData* data, NSError* error, BOOL finished) {
+        if (image && finished) {
+            if (isGif) {
+                currentPhoto.imageData = data;
+            } else {
+                currentPhoto.image = image;
             }
-        }];
+            [photosViewController updatePhoto:currentPhoto];
+        }
+    }];
 }
 
 #pragma mark - NYTPhotosViewControllerDelegate
