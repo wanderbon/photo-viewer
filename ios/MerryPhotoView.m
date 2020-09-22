@@ -199,7 +199,8 @@
     if (self.onDismiss) {
         self.onDismiss(nil);
     }
-    [self clean];
+    
+//    [self clean];
 }
 
 /**
