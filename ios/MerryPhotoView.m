@@ -192,15 +192,15 @@
 }
 
 - (void)photosViewController:(NYTPhotosViewController *)photosViewController actionCompletedWithActivityType:(NSString *)activityType {
-    if (self.hideStatusBar) {
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-    }
+     if (self.onDismiss && [activityType rangeOfString:@"SaveToCameraRoll"].location != NSNotFound) {
+         if (self.hideStatusBar) {
+             [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+         }
 
-    if (self.onDismiss) {
-        self.onDismiss(nil);
-    }
-    
-//    [self clean];
+         self.onDismiss(nil);
+
+         [self clean];
+     }
 }
 
 /**
@@ -289,6 +289,7 @@
     if (self.onDismiss) {
         self.onDismiss(nil);
     }
+    
     [self clean];
 }
 
