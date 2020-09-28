@@ -197,9 +197,9 @@
              [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
          }
 
-         self.onDismiss(nil);
+         //self.onDismiss(nil);
 
-         [self clean];
+         //[self clean];
      }
 }
 
