@@ -5,15 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.merryjs.PhotoViewer.R;
 import com.stfalcon.frescoimageviewer.ImageViewer;
-
 
 /**
  * Created by bang on 26/07/2017.
@@ -28,12 +24,15 @@ public class MerryPhotoOverlay extends RelativeLayout {
     private TextView tvClose;
     private ImageViewer imageViewer;
     private String sharingText;
+    private Context context;
+
     public void setImageViewer(ImageViewer imageViewer){
         this.imageViewer = imageViewer;
     }
     public MerryPhotoOverlay(Context context) {
         super(context);
         init();
+        this.context = context;
     }
 
     public MerryPhotoOverlay(Context context, AttributeSet attrs) {
@@ -91,9 +90,13 @@ public class MerryPhotoOverlay extends RelativeLayout {
     private void sendShareIntent() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, sharingText);
-        sendIntent.setType("text/plain");
+
+        sendIntent.putExtra(Intent.EXTRA_STREAM, sharingText);
+        sendIntent.setType("image/*");
         getContext().startActivity(sendIntent);
+
+        imageViewer.onDismiss();
+        setShareText("");
     }
 
     private void init() {
